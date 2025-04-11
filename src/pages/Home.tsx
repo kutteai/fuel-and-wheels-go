@@ -1,636 +1,555 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
+import { ArrowRight, CheckCircle, Fuel, Car, Clock, MapPin, Star, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Fuel, Car, Clock, MapPin, CheckCircle, Star, TrendingUp, Shield, Zap } from 'lucide-react';
 
 const Home = () => {
+  useEffect(() => {
+    // Add animation effects when page loads
+    window.scrollTo(0, 0);
+  }, []);
+
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6 }
+    }
+  };
+
+  const staggerChildren = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="hero-gradient text-white py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <Badge className="bg-brand-yellow text-gray-900 mb-4">Fast & Reliable Service</Badge>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                We bring fuel & basic car care to your doorstep
-              </h1>
-              <p className="text-lg md:text-xl mb-8 text-gray-100">
-                Save time and hassle with our on-demand fuel delivery and mobile car servicing. Available 24/7.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/fuel">
-                  <Button size="lg" className="bg-brand-yellow hover:bg-yellow-500 text-gray-900 w-full sm:w-auto">
-                    Order Fuel
-                  </Button>
-                </Link>
-                <Link to="/service">
-                  <Button size="lg" className="bg-white hover:bg-gray-100 text-brand-blue w-full sm:w-auto">
-                    Book Servicing
-                  </Button>
-                </Link>
-              </div>
+      <section className="relative hero-gradient py-20 md:py-32">
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/90 to-brand-orange/80 z-0"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div 
+            className="text-center max-w-4xl mx-auto text-white"
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+          >
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">We bring fuel & basic car care to your doorstep</h1>
+            <p className="text-xl mb-10 opacity-90">Save time and hassle with our convenient mobile services</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/fuel">
+                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-bold px-8 py-6 text-lg transition-transform hover:scale-105">
+                  Order Fuel <Fuel className="ml-2" />
+                </Button>
+              </Link>
+              <Link to="/service">
+                <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur-sm border-white hover:bg-white/20 text-white font-bold px-8 py-6 text-lg transition-transform hover:scale-105">
+                  Book Servicing <Car className="ml-2" />
+                </Button>
+              </Link>
             </div>
-            <div className="hidden md:block relative">
-              <div className="relative z-10 rounded-lg overflow-hidden shadow-xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1613643043796-a370ee00ecbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" 
-                  alt="Fuel delivery service" 
-                  className="w-full h-auto"
-                />
-              </div>
-              <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-lg z-20 card-shadow">
-                <div className="flex items-center space-x-3">
-                  <div className="bg-green-100 p-2 rounded-full">
-                    <CheckCircle className="h-8 w-8 text-green-600" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-gray-500">Trusted by</div>
-                    <div className="text-xl font-bold text-gray-900">5,000+ customers</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="section-title">Our Services</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              We offer a range of services designed to keep your vehicle running smoothly without
-              disrupting your busy schedule.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Fuel Delivery */}
-            <Card className="overflow-hidden card-shadow">
-              <div className="h-40 bg-brand-blue flex items-center justify-center">
-                <Fuel className="h-16 w-16 text-white" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-3 text-brand-blue">Fuel Delivery</h3>
-                <p className="text-gray-600 mb-4">
-                  Get petrol or diesel delivered directly to your vehicle, home, or office at your scheduled time.
-                </p>
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
-                    <span>Petrol & Diesel available</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
-                    <span>Scheduled or ASAP delivery</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
-                    <span>Transparent pricing</span>
-                  </li>
-                </ul>
-                <Link to="/fuel">
-                  <Button className="w-full bg-brand-blue hover:bg-blue-800">
-                    Order Fuel
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-            
-            {/* Car Servicing */}
-            <Card className="overflow-hidden card-shadow">
-              <div className="h-40 bg-brand-red flex items-center justify-center">
-                <Car className="h-16 w-16 text-white" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-3 text-brand-red">Car Servicing</h3>
-                <p className="text-gray-600 mb-4">
-                  Professional mobile car maintenance services performed at your location by certified technicians.
-                </p>
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
-                    <span>Oil changes & fluid top-ups</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
-                    <span>Tire pressure checks</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
-                    <span>Battery jump starts</span>
-                  </li>
-                </ul>
-                <Link to="/service">
-                  <Button className="w-full bg-brand-red hover:bg-red-700">
-                    Book Service
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-            
-            {/* Subscription Plans */}
-            <Card className="overflow-hidden card-shadow">
-              <div className="h-40 bg-brand-yellow flex items-center justify-center">
-                <Shield className="h-16 w-16 text-gray-900" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-3 text-gray-900">Subscription Plans</h3>
-                <p className="text-gray-600 mb-4">
-                  Save money with our monthly subscription plans. Get regular services at discounted rates.
-                </p>
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
-                    <span>Basic, Pro & Elite plans</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
-                    <span>Priority booking</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
-                    <span>Discounts on additional services</span>
-                  </li>
-                </ul>
-                <Link to="/subscription">
-                  <Button className="w-full bg-gray-900 hover:bg-gray-800">
-                    View Plans
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* How It Works */}
-      <section className="py-16">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+          >
             <h2 className="section-title">How It Works</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Getting fuel or car service is quick and simple with our easy 3-step process
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Step 1 */}
-            <div className="text-center">
-              <div className="bg-brand-lightgray rounded-full h-24 w-24 flex items-center justify-center mx-auto mb-6">
-                <MapPin className="h-12 w-12 text-brand-blue" />
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Our process is simple, fast, and designed with your convenience in mind</p>
+          </motion.div>
+
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            variants={staggerChildren}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.div variants={fadeIn} className="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
+              <div className="bg-brand-blue/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <MapPin className="text-brand-blue h-8 w-8" />
               </div>
-              <h3 className="text-xl font-bold mb-3">1. Place Your Order</h3>
-              <p className="text-gray-600">
-                Select your service, enter your location, and choose a delivery time that works for you.
-              </p>
-            </div>
-            
-            {/* Step 2 */}
-            <div className="text-center">
-              <div className="bg-brand-lightgray rounded-full h-24 w-24 flex items-center justify-center mx-auto mb-6">
-                <Clock className="h-12 w-12 text-brand-blue" />
+              <h3 className="text-xl font-semibold mb-3">Choose Your Location</h3>
+              <p className="text-gray-600">Enter your address and we'll come to you - at home, work, or anywhere else.</p>
+            </motion.div>
+
+            <motion.div variants={fadeIn} className="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
+              <div className="bg-brand-green/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Car className="text-brand-green h-8 w-8" />
               </div>
-              <h3 className="text-xl font-bold mb-3">2. Track in Real-Time</h3>
-              <p className="text-gray-600">
-                Watch as our technician or delivery driver makes their way to your location.
-              </p>
-            </div>
-            
-            {/* Step 3 */}
-            <div className="text-center">
-              <div className="bg-brand-lightgray rounded-full h-24 w-24 flex items-center justify-center mx-auto mb-6">
-                <CheckCircle className="h-12 w-12 text-brand-blue" />
+              <h3 className="text-xl font-semibold mb-3">Select Your Service</h3>
+              <p className="text-gray-600">Choose from fuel delivery, oil change, car wash, or other quick services.</p>
+            </motion.div>
+
+            <motion.div variants={fadeIn} className="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
+              <div className="bg-brand-orange/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Clock className="text-brand-orange h-8 w-8" />
               </div>
-              <h3 className="text-xl font-bold mb-3">3. Service Completed</h3>
-              <p className="text-gray-600">
-                Our professional will fulfill your order and you're good to go! No waiting in lines.
-              </p>
-            </div>
-          </div>
+              <h3 className="text-xl font-semibold mb-3">Schedule & Relax</h3>
+              <p className="text-gray-600">Book now or schedule for later. We'll arrive at the chosen time and take care of everything.</p>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Pricing & Plans Section */}
-      <section className="py-16 bg-gray-50">
+      {/* Services Section */}
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+          >
+            <h2 className="section-title">Our Services</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Comprehensive care for your vehicle, delivered to your location</p>
+          </motion.div>
+
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            variants={staggerChildren}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.div variants={fadeIn} className="card-shadow bg-white rounded-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="h-48 bg-gradient-to-r from-blue-500 to-blue-700 relative">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Fuel className="text-white h-20 w-20 opacity-30" />
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl font-semibold mb-4">Fuel Delivery</h3>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
+                    <span>Premium petrol & diesel</span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
+                    <span>Scheduled or on-demand delivery</span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
+                    <span>Safe, metered dispensing</span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
+                    <span>Electronic receipt</span>
+                  </li>
+                </ul>
+                <Link to="/fuel">
+                  <Button className="w-full">
+                    Order Fuel <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+
+            <motion.div variants={fadeIn} className="card-shadow bg-white rounded-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="h-48 bg-gradient-to-r from-green-500 to-green-700 relative">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Car className="text-white h-20 w-20 opacity-30" />
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl font-semibold mb-4">Car Servicing</h3>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
+                    <span>Oil change & filter replacement</span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
+                    <span>Car wash & detailing</span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
+                    <span>Tire pressure check</span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
+                    <span>Battery jump & fluid top-ups</span>
+                  </li>
+                </ul>
+                <Link to="/service">
+                  <Button className="w-full bg-brand-green hover:bg-brand-green/90">
+                    Book Service <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+          >
             <h2 className="section-title">Subscription Plans</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Choose a plan that fits your needs and save with our monthly subscription options
-            </p>
-          </div>
-          
-          <Tabs defaultValue="monthly" className="w-full max-w-5xl mx-auto">
-            <div className="flex justify-center mb-8">
-              <TabsList>
-                <TabsTrigger value="monthly">Monthly</TabsTrigger>
-                <TabsTrigger value="yearly">Yearly (Save 10%)</TabsTrigger>
-              </TabsList>
-            </div>
-            
-            <TabsContent value="monthly" className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Basic Plan */}
-                <Card className="overflow-hidden border-2 border-gray-200 card-shadow">
-                  <div className="bg-gray-100 p-6 text-center">
-                    <h3 className="text-xl font-bold">Basic Plan</h3>
-                    <div className="mt-4">
-                      <span className="text-4xl font-bold">₦5,000</span>
-                      <span className="text-gray-500">/month</span>
-                    </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <ul className="space-y-3">
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>1 Fuel Delivery/month (≤ 50L)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>1 Car or Generator Service/month</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Standard Delivery (within 24 hrs)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Basic Reminder Notification</span>
-                      </li>
-                    </ul>
-                    <Link to="/subscription" className="block mt-6">
-                      <Button className="w-full">Subscribe Now</Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-                
-                {/* Pro Plan */}
-                <Card className="overflow-hidden border-2 border-brand-blue relative card-shadow transform scale-105">
-                  <div className="absolute top-0 right-0">
-                    <Badge className="bg-brand-yellow text-gray-900 m-2">POPULAR</Badge>
-                  </div>
-                  <div className="bg-brand-blue text-white p-6 text-center">
-                    <h3 className="text-xl font-bold">Pro Plan</h3>
-                    <div className="mt-4">
-                      <span className="text-4xl font-bold">₦10,000</span>
-                      <span className="text-gray-300">/month</span>
-                    </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <ul className="space-y-3">
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>2 Fuel Deliveries/month (≤ 70L each)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>2 Services (Car/Generator – mix & match)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Same-day Delivery (if ordered before 3 PM)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Priority Booking (morning/evening slots)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>1 Free Car Wash/month</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>5% Discount on additional services</span>
-                      </li>
-                    </ul>
-                    <Link to="/subscription" className="block mt-6">
-                      <Button className="w-full bg-brand-blue hover:bg-blue-800">Subscribe Now</Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-                
-                {/* Elite Plan */}
-                <Card className="overflow-hidden border-2 border-gray-200 card-shadow">
-                  <div className="bg-gray-900 text-white p-6 text-center">
-                    <h3 className="text-xl font-bold">Elite Plan</h3>
-                    <div className="mt-4">
-                      <span className="text-4xl font-bold">₦18,000</span>
-                      <span className="text-gray-300">/month</span>
-                    </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <ul className="space-y-3">
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>4 Fuel Deliveries/month (≤ 100L each)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Unlimited Car + Generator Servicing</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Express Delivery (within 2 hours, 24/7)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>2 Free Car Washes/month</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>10% Discount on all extras and parts</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Dedicated Service Agent</span>
-                      </li>
-                    </ul>
-                    <Link to="/subscription" className="block mt-6">
-                      <Button className="w-full">Subscribe Now</Button>
-                    </Link>
-                  </CardContent>
-                </Card>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Choose the perfect plan for your needs and budget</p>
+          </motion.div>
+
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            variants={staggerChildren}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.div variants={fadeIn} className="border rounded-lg p-6 hover:shadow-lg transition-shadow relative">
+              <div className="absolute top-0 right-0 bg-brand-blue text-white px-4 py-1 rounded-bl-lg rounded-tr-lg text-sm font-semibold">
+                Basic
               </div>
-            </TabsContent>
-            
-            <TabsContent value="yearly" className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Basic Yearly */}
-                <Card className="overflow-hidden border-2 border-gray-200 card-shadow">
-                  <div className="bg-gray-100 p-6 text-center">
-                    <h3 className="text-xl font-bold">Basic Plan</h3>
-                    <div className="mt-4">
-                      <span className="text-4xl font-bold">₦54,000</span>
-                      <span className="text-gray-500">/year</span>
-                    </div>
-                    <p className="text-green-600 mt-2">Save ₦6,000</p>
-                  </div>
-                  <CardContent className="p-6">
-                    <ul className="space-y-3">
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>1 Fuel Delivery/month (≤ 50L)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>1 Car or Generator Service/month</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Standard Delivery (within 24 hrs)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Basic Reminder Notification</span>
-                      </li>
-                    </ul>
-                    <Link to="/subscription" className="block mt-6">
-                      <Button className="w-full">Subscribe Now</Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-                
-                {/* Pro Yearly */}
-                <Card className="overflow-hidden border-2 border-brand-blue relative card-shadow transform scale-105">
-                  <div className="absolute top-0 right-0">
-                    <Badge className="bg-brand-yellow text-gray-900 m-2">BEST VALUE</Badge>
-                  </div>
-                  <div className="bg-brand-blue text-white p-6 text-center">
-                    <h3 className="text-xl font-bold">Pro Plan</h3>
-                    <div className="mt-4">
-                      <span className="text-4xl font-bold">₦108,000</span>
-                      <span className="text-gray-300">/year</span>
-                    </div>
-                    <p className="text-green-400 mt-2">Save ₦12,000</p>
-                  </div>
-                  <CardContent className="p-6">
-                    <ul className="space-y-3">
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>2 Fuel Deliveries/month (≤ 70L each)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>2 Services (Car/Generator – mix & match)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Same-day Delivery (if ordered before 3 PM)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Priority Booking (morning/evening slots)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>1 Free Car Wash/month</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>5% Discount on additional services</span>
-                      </li>
-                    </ul>
-                    <Link to="/subscription" className="block mt-6">
-                      <Button className="w-full bg-brand-blue hover:bg-blue-800">Subscribe Now</Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-                
-                {/* Elite Yearly */}
-                <Card className="overflow-hidden border-2 border-gray-200 card-shadow">
-                  <div className="bg-gray-900 text-white p-6 text-center">
-                    <h3 className="text-xl font-bold">Elite Plan</h3>
-                    <div className="mt-4">
-                      <span className="text-4xl font-bold">₦194,400</span>
-                      <span className="text-gray-300">/year</span>
-                    </div>
-                    <p className="text-green-400 mt-2">Save ₦21,600</p>
-                  </div>
-                  <CardContent className="p-6">
-                    <ul className="space-y-3">
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>4 Fuel Deliveries/month (≤ 100L each)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Unlimited Car + Generator Servicing</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Express Delivery (within 2 hours, 24/7)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>2 Free Car Washes/month</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>10% Discount on all extras and parts</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Dedicated Service Agent</span>
-                      </li>
-                    </ul>
-                    <Link to="/subscription" className="block mt-6">
-                      <Button className="w-full">Subscribe Now</Button>
-                    </Link>
-                  </CardContent>
-                </Card>
+              <h3 className="text-2xl font-bold mb-2">Basic Plan</h3>
+              <div className="text-3xl font-bold mb-6">₦5,000<span className="text-base font-normal text-gray-500">/month</span></div>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-brand-green mr-2 shrink-0 mt-0.5" />
+                  <span>1 Fuel Delivery/month (≤ 50L)</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-brand-green mr-2 shrink-0 mt-0.5" />
+                  <span>1 Car or Generator Service/month</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-brand-green mr-2 shrink-0 mt-0.5" />
+                  <span>Standard Delivery (within 24 hrs)</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-brand-green mr-2 shrink-0 mt-0.5" />
+                  <span>Basic Reminder Notification</span>
+                </li>
+              </ul>
+              <Link to="/subscription">
+                <Button className="w-full" variant="outline">
+                  Subscribe Now
+                </Button>
+              </Link>
+            </motion.div>
+
+            <motion.div variants={fadeIn} className="border-2 border-brand-green rounded-lg p-6 shadow-lg relative">
+              <div className="absolute top-0 right-0 bg-brand-green text-white px-4 py-1 rounded-bl-lg rounded-tr-lg text-sm font-semibold">
+                Popular
               </div>
-            </TabsContent>
-          </Tabs>
-          
-          <div className="text-center mt-12">
-            <p className="text-gray-600 mb-6">
-              Prefer to pay as you go? No problem!
-            </p>
-            <Link to="/fuel">
-              <Button variant="outline" className="mr-4">Order Fuel</Button>
-            </Link>
-            <Link to="/service">
-              <Button variant="outline">Book Service</Button>
-            </Link>
-          </div>
+              <h3 className="text-2xl font-bold mb-2">Pro Plan</h3>
+              <div className="text-3xl font-bold mb-6">₦10,000<span className="text-base font-normal text-gray-500">/month</span></div>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-brand-green mr-2 shrink-0 mt-0.5" />
+                  <span>2 Fuel Deliveries/month (≤ 70L each)</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-brand-green mr-2 shrink-0 mt-0.5" />
+                  <span>2 Services (Car/Generator)</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-brand-green mr-2 shrink-0 mt-0.5" />
+                  <span>Same-day Delivery (if ordered before 3 PM)</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-brand-green mr-2 shrink-0 mt-0.5" />
+                  <span>1 Free Car Wash/month</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-brand-green mr-2 shrink-0 mt-0.5" />
+                  <span>5% Discount on additional services</span>
+                </li>
+              </ul>
+              <Link to="/subscription">
+                <Button className="w-full bg-brand-green hover:bg-green-600">
+                  Subscribe Now
+                </Button>
+              </Link>
+            </motion.div>
+
+            <motion.div variants={fadeIn} className="border rounded-lg p-6 hover:shadow-lg transition-shadow relative">
+              <div className="absolute top-0 right-0 bg-brand-orange text-white px-4 py-1 rounded-bl-lg rounded-tr-lg text-sm font-semibold">
+                Elite
+              </div>
+              <h3 className="text-2xl font-bold mb-2">Elite Plan</h3>
+              <div className="text-3xl font-bold mb-6">₦18,000<span className="text-base font-normal text-gray-500">/month</span></div>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-brand-green mr-2 shrink-0 mt-0.5" />
+                  <span>4 Fuel Deliveries/month (≤ 100L each)</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-brand-green mr-2 shrink-0 mt-0.5" />
+                  <span>Unlimited Car + Generator Servicing</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-brand-green mr-2 shrink-0 mt-0.5" />
+                  <span>Express Delivery (within 2 hours, 24/7)</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-brand-green mr-2 shrink-0 mt-0.5" />
+                  <span>2 Free Car Washes/month</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-brand-green mr-2 shrink-0 mt-0.5" />
+                  <span>10% Discount on all extras and parts</span>
+                </li>
+              </ul>
+              <Link to="/subscription">
+                <Button className="w-full" variant="outline">
+                  Subscribe Now
+                </Button>
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-16">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+          >
             <h2 className="section-title">What Our Customers Say</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Don't just take our word for it - hear from some of our satisfied customers
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Testimonial 1 */}
-            <Card className="card-shadow">
-              <CardContent className="p-6">
-                <div className="flex justify-center mb-4">
-                  <div className="flex text-yellow-400">
-                    <Star className="fill-current" />
-                    <Star className="fill-current" />
-                    <Star className="fill-current" />
-                    <Star className="fill-current" />
-                    <Star className="fill-current" />
-                  </div>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Hear from people who've experienced our service</p>
+          </motion.div>
+
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            variants={staggerChildren}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.div variants={fadeIn} className="bg-white p-6 rounded-lg shadow-md">
+              <div className="flex mb-4">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star key={star} className="h-5 w-5 text-yellow-500 fill-current" />
+                ))}
+              </div>
+              <p className="mb-4 text-gray-700">
+                "The convenience is incredible! I no longer have to waste time at fuel stations. Their staff is professional and the service is punctual."
+              </p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-brand-blue/20 rounded-full flex items-center justify-center mr-3">
+                  <span className="text-brand-blue font-bold">AO</span>
                 </div>
-                <p className="text-gray-700 italic mb-6">
-                  "I can't believe how convenient this service is! No more waiting in line at the filling station. 
-                  The fuel was delivered right on time, and the price was fair. Highly recommend!"
-                </p>
-                <div className="flex items-center justify-center">
-                  <div className="mr-4">
-                    <div className="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center">
-                      <span className="text-gray-600 font-semibold">OA</span>
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">Oluwaseun A.</h4>
-                    <p className="text-sm text-gray-500">Lagos, Nigeria</p>
-                  </div>
+                <div>
+                  <h4 className="font-semibold">Adebayo Ogunlesi</h4>
+                  <p className="text-sm text-gray-500">Lagos, Nigeria</p>
                 </div>
-              </CardContent>
-            </Card>
-            
-            {/* Testimonial 2 */}
-            <Card className="card-shadow">
-              <CardContent className="p-6">
-                <div className="flex justify-center mb-4">
-                  <div className="flex text-yellow-400">
-                    <Star className="fill-current" />
-                    <Star className="fill-current" />
-                    <Star className="fill-current" />
-                    <Star className="fill-current" />
-                    <Star className="fill-current" />
-                  </div>
+              </div>
+            </motion.div>
+
+            <motion.div variants={fadeIn} className="bg-white p-6 rounded-lg shadow-md">
+              <div className="flex mb-4">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star key={star} className="h-5 w-5 text-yellow-500 fill-current" />
+                ))}
+              </div>
+              <p className="mb-4 text-gray-700">
+                "I subscribed to the Pro plan and it's been worth every naira. Regular oil changes and fuel delivery right to my office has saved me so much time."
+              </p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-brand-green/20 rounded-full flex items-center justify-center mr-3">
+                  <span className="text-brand-green font-bold">CN</span>
                 </div>
-                <p className="text-gray-700 italic mb-6">
-                  "The Pro subscription has been a game-changer for me. I never have to worry about my car maintenance
-                  or fuel anymore. The technicians are professional and always on time."
-                </p>
-                <div className="flex items-center justify-center">
-                  <div className="mr-4">
-                    <div className="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center">
-                      <span className="text-gray-600 font-semibold">CJ</span>
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">Chioma J.</h4>
-                    <p className="text-sm text-gray-500">Abuja, Nigeria</p>
-                  </div>
+                <div>
+                  <h4 className="font-semibold">Chioma Nwosu</h4>
+                  <p className="text-sm text-gray-500">Abuja, Nigeria</p>
                 </div>
-              </CardContent>
-            </Card>
-            
-            {/* Testimonial 3 */}
-            <Card className="card-shadow">
-              <CardContent className="p-6">
-                <div className="flex justify-center mb-4">
-                  <div className="flex text-yellow-400">
-                    <Star className="fill-current" />
-                    <Star className="fill-current" />
-                    <Star className="fill-current" />
-                    <Star className="fill-current" />
-                    <Star className="fill-current" />
-                  </div>
+              </div>
+            </motion.div>
+
+            <motion.div variants={fadeIn} className="bg-white p-6 rounded-lg shadow-md">
+              <div className="flex mb-4">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star key={star} className="h-5 w-5 text-yellow-500 fill-current" />
+                ))}
+              </div>
+              <p className="mb-4 text-gray-700">
+                "Their emergency service saved me when my car battery died at night. A technician arrived within 30 minutes and got me back on the road quickly."
+              </p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-brand-orange/20 rounded-full flex items-center justify-center mr-3">
+                  <span className="text-brand-orange font-bold">TI</span>
                 </div>
-                <p className="text-gray-700 italic mb-6">
-                  "As a business owner with a fleet of vehicles, the Elite plan has saved us countless hours.
-                  Their tracking system lets me know exactly when services are completed. Excellent service!"
-                </p>
-                <div className="flex items-center justify-center">
-                  <div className="mr-4">
-                    <div className="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center">
-                      <span className="text-gray-600 font-semibold">EM</span>
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">Emmanuel M.</h4>
-                    <p className="text-sm text-gray-500">Port Harcourt, Nigeria</p>
-                  </div>
+                <div>
+                  <h4 className="font-semibold">Tunde Ibrahim</h4>
+                  <p className="text-sm text-gray-500">Port Harcourt, Nigeria</p>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="hero-gradient text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to save time and hassle?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who never worry about fuel or car maintenance again.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/fuel">
-              <Button size="lg" className="bg-brand-yellow hover:bg-yellow-500 text-gray-900">
-                Order Fuel
-              </Button>
+      {/* Blog Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            className="flex justify-between items-center mb-12"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+          >
+            <h2 className="section-title mb-0">Latest From Our Blog</h2>
+            <Link to="/blog" className="text-brand-blue hover:text-brand-blue/80 font-medium flex items-center">
+              View All Posts <ChevronRight className="h-4 w-4 ml-1" />
             </Link>
-            <Link to="/service">
-              <Button size="lg" className="bg-white hover:bg-gray-100 text-brand-blue">
-                Book Servicing
+          </motion.div>
+
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            variants={staggerChildren}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.div variants={fadeIn} className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+              <div className="h-48 bg-gray-200 relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/50 to-brand-blue/30 flex items-center justify-center">
+                  <Fuel className="h-16 w-16 text-white opacity-50" />
+                </div>
+              </div>
+              <div className="p-6">
+                <p className="text-sm text-gray-500 mb-2">April 5, 2025</p>
+                <h3 className="text-xl font-semibold mb-3 hover:text-brand-blue transition-colors">
+                  <Link to="/blog/fuel-efficiency">7 Tips for Better Fuel Efficiency</Link>
+                </h3>
+                <p className="text-gray-600 mb-4 line-clamp-3">
+                  Learn how to make your fuel last longer with these practical tips from our mechanics and automotive experts.
+                </p>
+                <Link to="/blog/fuel-efficiency" className="text-brand-blue hover:text-brand-blue/80 font-medium inline-flex items-center">
+                  Read More <ChevronRight className="h-4 w-4 ml-1" />
+                </Link>
+              </div>
+            </motion.div>
+
+            <motion.div variants={fadeIn} className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+              <div className="h-48 bg-gray-200 relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-green/50 to-brand-green/30 flex items-center justify-center">
+                  <Car className="h-16 w-16 text-white opacity-50" />
+                </div>
+              </div>
+              <div className="p-6">
+                <p className="text-sm text-gray-500 mb-2">April 2, 2025</p>
+                <h3 className="text-xl font-semibold mb-3 hover:text-brand-blue transition-colors">
+                  <Link to="/blog/car-maintenance">Essential Car Maintenance During Rainy Season</Link>
+                </h3>
+                <p className="text-gray-600 mb-4 line-clamp-3">
+                  Protect your vehicle during Nigeria's rainy season with these maintenance tips from our expert technicians.
+                </p>
+                <Link to="/blog/car-maintenance" className="text-brand-blue hover:text-brand-blue/80 font-medium inline-flex items-center">
+                  Read More <ChevronRight className="h-4 w-4 ml-1" />
+                </Link>
+              </div>
+            </motion.div>
+
+            <motion.div variants={fadeIn} className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+              <div className="h-48 bg-gray-200 relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-orange/50 to-brand-orange/30 flex items-center justify-center">
+                  <Clock className="h-16 w-16 text-white opacity-50" />
+                </div>
+              </div>
+              <div className="p-6">
+                <p className="text-sm text-gray-500 mb-2">March 28, 2025</p>
+                <h3 className="text-xl font-semibold mb-3 hover:text-brand-blue transition-colors">
+                  <Link to="/blog/subscription-benefits">Why Subscription Plans Save Both Time and Money</Link>
+                </h3>
+                <p className="text-gray-600 mb-4 line-clamp-3">
+                  Discover how our subscription plans can provide convenience while reducing your overall vehicle maintenance costs.
+                </p>
+                <Link to="/blog/subscription-benefits" className="text-brand-blue hover:text-brand-blue/80 font-medium inline-flex items-center">
+                  Read More <ChevronRight className="h-4 w-4 ml-1" />
+                </Link>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-16 bg-brand-blue text-white">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            className="max-w-2xl mx-auto text-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+          >
+            <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
+            <p className="mb-8 opacity-90">Subscribe to our newsletter for promotions, tips, and industry insights</p>
+            <form className="flex flex-col sm:flex-row gap-3">
+              <input 
+                type="email" 
+                placeholder="Your email address" 
+                className="flex-1 px-4 py-3 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-orange"
+                required
+              />
+              <Button type="submit" className="bg-brand-orange hover:bg-brand-orange/90 px-6 py-3 font-semibold">
+                Subscribe
               </Button>
-            </Link>
-            <Link to="/subscription">
-              <Button size="lg" className="bg-black hover:bg-gray-900 text-white">
-                View Plans
-              </Button>
-            </Link>
-          </div>
+            </form>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center justify-between gap-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+          >
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">Ready to save time on vehicle maintenance?</h2>
+              <p className="text-gray-600">Join thousands of satisfied customers across Nigeria.</p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link to="/fuel">
+                <Button size="lg" className="bg-brand-blue hover:bg-brand-blue/90 min-w-[150px]">
+                  Get Started
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button size="lg" variant="outline" className="min-w-[150px]">
+                  Contact Us
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

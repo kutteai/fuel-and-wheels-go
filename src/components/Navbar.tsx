@@ -1,134 +1,208 @@
 
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Menu, X, Fuel, Car, User } from 'lucide-react';
+import { Menu, X, Fuel, Car, User, LogIn, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/contexts/AuthContext';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const { user, isAuthenticated, logout } = useAuth();
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-3">
+    <nav 
+      className={cn(
+        "sticky top-0 z-50 transition-all duration-300",
+        scrolled ? "bg-white shadow-md py-2" : "bg-white shadow-sm py-3"
+      )}
+    >
+      <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="relative h-10 w-10 overflow-hidden rounded-full bg-brand-blue">
+            <motion.div 
+              className="relative h-10 w-10 overflow-hidden rounded-full bg-brand-blue"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
               <div className="absolute inset-0 flex items-center justify-center">
                 <Fuel className="h-6 w-6 text-white" />
               </div>
-            </div>
-            <span className="font-bold text-xl text-brand-blue">Fuel<span className="text-brand-red">&Wheels</span></span>
+            </motion.div>
+            <span className="font-bold text-xl text-brand-blue">Fuel<span className="text-red-500">&Wheels</span></span>
           </Link>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="font-medium text-gray-700 hover:text-brand-blue">
-              Home
-            </Link>
-            <Link to="/fuel" className="font-medium text-gray-700 hover:text-brand-blue">
-              Fuel Delivery
-            </Link>
-            <Link to="/service" className="font-medium text-gray-700 hover:text-brand-blue">
-              Car Service
-            </Link>
-            <Link to="/subscription" className="font-medium text-gray-700 hover:text-brand-blue">
-              Plans
-            </Link>
-            <Link to="/track" className="font-medium text-gray-700 hover:text-brand-blue">
-              Track Order
-            </Link>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/fuel">Fuel Delivery</NavLink>
+            <NavLink to="/service">Car Service</NavLink>
+            <NavLink to="/subscription">Plans</NavLink>
+            <NavLink to="/blog">Blog</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
           </div>
           
           {/* Login/Dashboard and Order Button */}
           <div className="hidden md:flex items-center space-x-3">
-            <Link to="/dashboard">
-              <Button variant="ghost" className="flex items-center space-x-1">
-                <User className="h-4 w-4" />
-                <span>Dashboard</span>
-              </Button>
-            </Link>
+            {isAuthenticated ? (
+              <>
+                <Link to="/dashboard">
+                  <Button variant="ghost" className="flex items-center space-x-1">
+                    <User className="h-4 w-4" />
+                    <span>Dashboard</span>
+                  </Button>
+                </Link>
+                <Button 
+                  variant="outline" 
+                  className="flex items-center" 
+                  onClick={logout}
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Link to="/login">
+                <Button variant="ghost" className="flex items-center space-x-1">
+                  <LogIn className="h-4 w-4 mr-1" />
+                  <span>Login</span>
+                </Button>
+              </Link>
+            )}
             <Link to="/fuel">
-              <Button className="bg-brand-red hover:bg-red-700 text-white">
+              <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white transition-transform hover:scale-105">
                 Order Now
               </Button>
             </Link>
           </div>
           
           {/* Mobile Menu Button */}
-          <button 
+          <motion.button 
             onClick={toggleMenu}
             className="md:hidden text-gray-600 focus:outline-none"
+            whileTap={{ scale: 0.95 }}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          </motion.button>
         </div>
         
         {/* Mobile Menu */}
-        <div className={cn(
-          "md:hidden absolute left-0 right-0 bg-white z-20 shadow-md transition-all duration-300 ease-in-out",
-          isMenuOpen ? "max-h-screen py-4" : "max-h-0 overflow-hidden py-0"
-        )}>
-          <div className="container mx-auto px-4 flex flex-col space-y-4">
-            <Link 
-              to="/" 
-              className="font-medium text-gray-700 hover:text-brand-blue py-2"
-              onClick={() => setIsMenuOpen(false)}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              className="md:hidden absolute left-0 right-0 bg-white z-20 shadow-md pb-4 px-4"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
             >
-              Home
-            </Link>
-            <Link 
-              to="/fuel" 
-              className="font-medium text-gray-700 hover:text-brand-blue py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Fuel Delivery
-            </Link>
-            <Link 
-              to="/service" 
-              className="font-medium text-gray-700 hover:text-brand-blue py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Car Service
-            </Link>
-            <Link 
-              to="/subscription" 
-              className="font-medium text-gray-700 hover:text-brand-blue py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Plans
-            </Link>
-            <Link 
-              to="/track" 
-              className="font-medium text-gray-700 hover:text-brand-blue py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Track Order
-            </Link>
-            <Link 
-              to="/dashboard" 
-              className="font-medium text-gray-700 hover:text-brand-blue py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Dashboard
-            </Link>
-            <Link 
-              to="/fuel" 
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <Button className="w-full bg-brand-red hover:bg-red-700 text-white">
-                Order Now
-              </Button>
-            </Link>
-          </div>
-        </div>
+              <div className="container mx-auto flex flex-col space-y-4 pt-4">
+                <MobileNavLink to="/">Home</MobileNavLink>
+                <MobileNavLink to="/fuel">Fuel Delivery</MobileNavLink>
+                <MobileNavLink to="/service">Car Service</MobileNavLink>
+                <MobileNavLink to="/subscription">Plans</MobileNavLink>
+                <MobileNavLink to="/blog">Blog</MobileNavLink>
+                <MobileNavLink to="/contact">Contact</MobileNavLink>
+                
+                {isAuthenticated ? (
+                  <>
+                    <MobileNavLink to="/dashboard">Dashboard</MobileNavLink>
+                    <Button 
+                      variant="outline" 
+                      className="flex items-center justify-center mt-2" 
+                      onClick={logout}
+                    >
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Logout
+                    </Button>
+                  </>
+                ) : (
+                  <MobileNavLink to="/login">Login</MobileNavLink>
+                )}
+                
+                <Link to="/fuel">
+                  <Button className="w-full bg-brand-orange hover:bg-brand-orange/90 text-white mt-2">
+                    Order Now
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
+  );
+};
+
+// Desktop Navigation Link component
+const NavLink = ({ to, children }: { to: string, children: React.ReactNode }) => {
+  const location = useLocation();
+  const isActive = location.pathname === to || 
+                   (to !== '/' && location.pathname.startsWith(to));
+
+  return (
+    <Link 
+      to={to} 
+      className={cn(
+        "font-medium transition-colors relative group",
+        isActive ? "text-brand-blue" : "text-gray-700 hover:text-brand-blue"
+      )}
+    >
+      {children}
+      <span className={cn(
+        "absolute bottom-0 left-0 w-full h-0.5 bg-brand-blue transform transition-transform scale-x-0 group-hover:scale-x-100 origin-left",
+        isActive && "scale-x-100"
+      )}></span>
+    </Link>
+  );
+};
+
+// Mobile Navigation Link component
+const MobileNavLink = ({ to, children }: { to: string, children: React.ReactNode }) => {
+  const location = useLocation();
+  const isActive = location.pathname === to || 
+                   (to !== '/' && location.pathname.startsWith(to));
+
+  return (
+    <Link 
+      to={to} 
+      className={cn(
+        "py-2 font-medium block",
+        isActive ? "text-brand-blue" : "text-gray-700"
+      )}
+    >
+      {children}
+    </Link>
   );
 };
 
