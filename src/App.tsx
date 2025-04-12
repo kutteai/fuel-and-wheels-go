@@ -57,15 +57,20 @@ const App = () => {
                 <Route 
                   path="/admin" 
                   element={
-                    <ProtectedRoute>
-                      <AdminDashboard />
-                    </ProtectedRoute>
+                    <div className="min-h-screen">
+                      <ProtectedRoute>
+                        <AdminDashboard />
+                      </ProtectedRoute>
+                    </div>
                   } 
                 />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
-            <Footer />
+            <Routes>
+              <Route path="/admin" element={null} />
+              <Route path="*" element={<Footer />} />
+            </Routes>
           </div>
           <Toaster />
           <Sonner />

@@ -1,10 +1,9 @@
-
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle, Fuel, Car, Clock, MapPin, Star, ChevronRight } from 'lucide-react';
+import { ArrowRight, CheckCircle, Fuel, Car, Clock, MapPin, Star, ChevronRight, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 
 const Home = () => {
   useEffect(() => {
@@ -30,6 +29,28 @@ const Home = () => {
       }
     }
   };
+
+  // Services data
+  const services = [
+    {
+      title: "Fuel Delivery",
+      description: "Get fuel delivered directly to your location, whether it's for your vehicle or generator.",
+      icon: Fuel,
+      link: "/fuel"
+    },
+    {
+      title: "Car Service & Maintenance",
+      description: "Professional car maintenance and repair services to keep your vehicle running smoothly.",
+      icon: Car,
+      link: "/service"
+    },
+    {
+      title: "Generator Maintenance",
+      description: "Expert generator maintenance, repairs, and installation services for reliable power.",
+      icon: Zap,
+      link: "/generator"
+    }
+  ];
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -110,94 +131,37 @@ const Home = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-16 bg-white" id="services">
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeIn}
-          >
-            <h2 className="section-title">Our Services</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Comprehensive care for your vehicle, delivered to your location</p>
-          </motion.div>
-
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-            variants={staggerChildren}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <motion.div variants={fadeIn} className="card-shadow bg-white rounded-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="h-48 bg-gradient-to-r from-blue-500 to-blue-700 relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Fuel className="text-white h-20 w-20 opacity-30" />
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-semibold mb-4">Fuel Delivery</h3>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
-                    <span>Premium petrol & diesel</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
-                    <span>Scheduled or on-demand delivery</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
-                    <span>Safe, metered dispensing</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
-                    <span>Electronic receipt</span>
-                  </li>
-                </ul>
-                <Link to="/fuel">
-                  <Button className="w-full">
-                    Order Fuel <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
-
-            <motion.div variants={fadeIn} className="card-shadow bg-white rounded-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="h-48 bg-gradient-to-r from-green-500 to-green-700 relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Car className="text-white h-20 w-20 opacity-30" />
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-semibold mb-4">Car Servicing</h3>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
-                    <span>Oil change & filter replacement</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
-                    <span>Car wash & detailing</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
-                    <span>Tire pressure check</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-brand-green mr-2" />
-                    <span>Battery jump & fluid top-ups</span>
-                  </li>
-                </ul>
-                <Link to="/service">
-                  <Button className="w-full bg-brand-green hover:bg-brand-green/90">
-                    Book Service <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
-          </motion.div>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Services</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              We offer a range of services to keep you moving without interruption.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow">
+                <CardHeader className="flex flex-row items-center gap-4 pb-2">
+                  <div className="bg-brand-purple/10 p-2 rounded-full">
+                    <service.icon className="h-8 w-8 text-brand-purple" />
+                  </div>
+                  <CardTitle className="text-xl">{service.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">{service.description}</p>
+                </CardContent>
+                <CardFooter>
+                  <Link to={service.link}>
+                    <Button variant="outline" className="w-full">
+                      Learn More <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 

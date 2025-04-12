@@ -13,7 +13,9 @@ import {
   LogOut, 
   Home, 
   MapPin,
-  AlertCircle
+  AlertCircle,
+  Menu,
+  Zap
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -25,6 +27,17 @@ import PaymentTab from '@/components/dashboard/PaymentTab';
 import SubscriptionTab from '@/components/dashboard/SubscriptionTab';
 import OrderHistoryTab from '@/components/dashboard/OrderHistoryTab';
 import SettingsTab from '@/components/dashboard/SettingsTab';
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarTrigger,
+  SidebarHeader
+} from "@/components/ui/sidebar";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -43,87 +56,78 @@ const Dashboard = () => {
       description: "You have been successfully logged out.",
     });
   };
+
+  // Define menu items
+  const menuItems = [
+    { id: "overview", label: "Overview", icon: Home },
+    { id: "profile", label: "Profile", icon: User },
+    { id: "vehicles", label: "My Vehicles", icon: Car },
+    { id: "locations", label: "Saved Locations", icon: MapPin },
+    { id: "payment", label: "Payment Methods", icon: CreditCard },
+    { id: "subscription", label: "Subscription", icon: Shield },
+    { id: "history", label: "Order History", icon: History },
+    { id: "settings", label: "Settings", icon: Settings },
+  ];
   
   return (
     <div className="container mx-auto py-10 px-4">
       <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+      <div className="block md:hidden mb-6">
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline" className="flex items-center gap-2">
+              <Menu className="h-5 w-5" />
+              <span>Dashboard Menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-[240px] p-0">
+            <div className="py-4 px-2">
+              <div className="space-y-2">
+                {menuItems.map(item => (
+                  <Button 
+                    key={item.id}
+                    variant={activeTab === item.id ? "default" : "ghost"} 
+                    className="w-full justify-start" 
+                    size="sm"
+                    onClick={() => {
+                      handleTabChange(item.id);
+                    }}
+                  >
+                    <item.icon className="mr-2 h-4 w-4" />
+                    <span className="w-full text-left">{item.label}</span>
+                  </Button>
+                ))}
+                <Button 
+                  variant="ghost" 
+                  className="w-full justify-start text-red-500" 
+                  size="sm"
+                  onClick={handleLogout}
+                >
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span className="w-full text-left">Logout</span>
+                </Button>
+              </div>
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="md:col-span-1 space-y-6">
+        <div className="hidden md:block md:col-span-1 space-y-6">
           <Card>
             <CardContent className="p-6">
               <div className="space-y-2">
-                <Button 
-                  variant={activeTab === "overview" ? "default" : "ghost"} 
-                  className="w-full justify-start" 
-                  size="lg"
-                  onClick={() => handleTabChange("overview")}
-                >
-                  <Home className="mr-2 h-5 w-5" />
-                  <span className="w-full text-left">Overview</span>
-                </Button>
-                <Button 
-                  variant={activeTab === "profile" ? "default" : "ghost"} 
-                  className="w-full justify-start" 
-                  size="lg"
-                  onClick={() => handleTabChange("profile")}
-                >
-                  <User className="mr-2 h-5 w-5" />
-                  <span className="w-full text-left">Profile</span>
-                </Button>
-                <Button 
-                  variant={activeTab === "vehicles" ? "default" : "ghost"} 
-                  className="w-full justify-start" 
-                  size="lg"
-                  onClick={() => handleTabChange("vehicles")}
-                >
-                  <Car className="mr-2 h-5 w-5" />
-                  <span className="w-full text-left">My Vehicles</span>
-                </Button>
-                <Button 
-                  variant={activeTab === "locations" ? "default" : "ghost"} 
-                  className="w-full justify-start" 
-                  size="lg"
-                  onClick={() => handleTabChange("locations")}
-                >
-                  <MapPin className="mr-2 h-5 w-5" />
-                  <span className="w-full text-left">Saved Locations</span>
-                </Button>
-                <Button 
-                  variant={activeTab === "payment" ? "default" : "ghost"} 
-                  className="w-full justify-start" 
-                  size="lg"
-                  onClick={() => handleTabChange("payment")}
-                >
-                  <CreditCard className="mr-2 h-5 w-5" />
-                  <span className="w-full text-left">Payment Methods</span>
-                </Button>
-                <Button 
-                  variant={activeTab === "subscription" ? "default" : "ghost"} 
-                  className="w-full justify-start" 
-                  size="lg"
-                  onClick={() => handleTabChange("subscription")}
-                >
-                  <Shield className="mr-2 h-5 w-5" />
-                  <span className="w-full text-left">Subscription</span>
-                </Button>
-                <Button 
-                  variant={activeTab === "history" ? "default" : "ghost"} 
-                  className="w-full justify-start" 
-                  size="lg"
-                  onClick={() => handleTabChange("history")}
-                >
-                  <History className="mr-2 h-5 w-5" />
-                  <span className="w-full text-left">Order History</span>
-                </Button>
-                <Button 
-                  variant={activeTab === "settings" ? "default" : "ghost"} 
-                  className="w-full justify-start" 
-                  size="lg"
-                  onClick={() => handleTabChange("settings")}
-                >
-                  <Settings className="mr-2 h-5 w-5" />
-                  <span className="w-full text-left">Settings</span>
-                </Button>
+                {menuItems.map(item => (
+                  <Button 
+                    key={item.id}
+                    variant={activeTab === item.id ? "default" : "ghost"} 
+                    className="w-full justify-start" 
+                    size="lg"
+                    onClick={() => handleTabChange(item.id)}
+                  >
+                    <item.icon className="mr-2 h-5 w-5" />
+                    <span className="w-full text-left">{item.label}</span>
+                  </Button>
+                ))}
                 <Button 
                   variant="ghost" 
                   className="w-full justify-start text-red-500" 
@@ -160,12 +164,15 @@ const Dashboard = () => {
                 <CardHeader>
                   <CardTitle>Quick Actions</CardTitle>
                 </CardHeader>
-                <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <Button className="flex items-center justify-center gap-2" onClick={() => navigate("/service")}>
-                    <Wrench className="h-5 w-5" /> Book Car Service
+                    <Wrench className="h-5 w-5" /> Car Service
                   </Button>
                   <Button className="flex items-center justify-center gap-2" variant="outline" onClick={() => navigate("/fuel")}>
                     Order Fuel Delivery
+                  </Button>
+                  <Button className="flex items-center justify-center gap-2" variant="outline" onClick={() => navigate("/generator")}>
+                    <Zap className="h-5 w-5" /> Generator Service
                   </Button>
                 </CardContent>
               </Card>
