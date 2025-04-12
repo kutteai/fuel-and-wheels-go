@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import FuelDelivery from "./pages/FuelDelivery";
 import CarService from "./pages/CarService";
+import GeneratorService from "./pages/GeneratorService";
 import TrackOrder from "./pages/TrackOrder";
 import Subscription from "./pages/Subscription";
 import Dashboard from "./pages/Dashboard";
@@ -36,6 +37,7 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/fuel" element={<FuelDelivery />} />
                 <Route path="/service" element={<CarService />} />
+                <Route path="/generator" element={<GeneratorService />} />
                 <Route path="/track" element={<TrackOrder />} />
                 <Route path="/subscription" element={<Subscription />} />
                 <Route path="/blog" element={<Blog />} />

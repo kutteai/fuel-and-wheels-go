@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Menu, X, Fuel, Car, User, LogIn, LogOut } from 'lucide-react';
+import { Menu, X, Fuel, Car, User, LogIn, LogOut, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -50,16 +50,14 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <motion.div 
-              className="relative h-10 w-10 overflow-hidden rounded-full bg-brand-blue"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Fuel className="h-6 w-6 text-white" />
-              </div>
-            </motion.div>
-            <span className="font-bold text-xl text-brand-blue">Fuel<span className="text-red-500">&Wheels</span></span>
+            <div className="h-12 w-12 relative">
+              <img 
+                src="/lovable-uploads/8cb67c2f-8aea-46cd-affa-fde848dcb918.png" 
+                alt="Creskiosk Logo" 
+                className="h-full w-full object-contain"
+              />
+            </div>
+            <span className="font-bold text-xl text-brand-blue">Creskiosk</span>
           </Link>
           
           {/* Desktop Navigation */}
@@ -67,6 +65,7 @@ const Navbar = () => {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/fuel">Fuel Delivery</NavLink>
             <NavLink to="/service">Car Service</NavLink>
+            <NavLink to="/generator">Generator Service</NavLink>
             <NavLink to="/subscription">Plans</NavLink>
             <NavLink to="/blog">Blog</NavLink>
             <NavLink to="/contact">Contact</NavLink>
@@ -130,6 +129,7 @@ const Navbar = () => {
                 <MobileNavLink to="/">Home</MobileNavLink>
                 <MobileNavLink to="/fuel">Fuel Delivery</MobileNavLink>
                 <MobileNavLink to="/service">Car Service</MobileNavLink>
+                <MobileNavLink to="/generator">Generator Service</MobileNavLink>
                 <MobileNavLink to="/subscription">Plans</MobileNavLink>
                 <MobileNavLink to="/blog">Blog</MobileNavLink>
                 <MobileNavLink to="/contact">Contact</MobileNavLink>

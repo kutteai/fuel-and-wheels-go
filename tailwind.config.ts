@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss"
 
 export default {
@@ -20,15 +21,15 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#007BFF",
+          DEFAULT: "#0057B8", // Creskiosk Blue
           foreground: "hsl(210 40% 98%)",
         },
         secondary: {
-          DEFAULT: "#28A745",
+          DEFAULT: "#009A4E", // Creskiosk Green
           foreground: "hsl(140 60% 98%)",
         },
         accent: {
-          DEFAULT: "#FFA500",
+          DEFAULT: "#FF8200", // Creskiosk Orange
           foreground: "hsl(39 100% 20%)",
         },
         background: {
@@ -36,9 +37,9 @@ export default {
           foreground: "#343A40",
         },
         brand: {
-          blue: "#007BFF",
-          green: "#28A745",
-          orange: "#FFA500",
+          blue: "#0057B8",    // Creskiosk Blue
+          green: "#009A4E",   // Creskiosk Green
+          orange: "#FF8200",  // Creskiosk Orange
           lightgray: "#F8F9FA",
           darkgray: "#343A40",
         },

@@ -82,6 +82,19 @@ const ProfileTab = () => {
                 </div>
                 
                 <div className="space-y-2">
+                  <label htmlFor="fuelPreference" className="font-medium">Fuel Delivery Notification Preferences</label>
+                  <select 
+                    id="fuelPreference" 
+                    className="w-full p-2 border rounded-md"
+                    defaultValue="email"
+                  >
+                    <option value="email">Email Only</option>
+                    <option value="sms">SMS Only</option>
+                    <option value="both">Both Email and SMS</option>
+                  </select>
+                </div>
+                
+                <div className="space-y-2">
                   <label htmlFor="maintenanceReminder" className="font-medium">Maintenance Reminder Frequency</label>
                   <select 
                     id="maintenanceReminder" 
@@ -91,6 +104,20 @@ const ProfileTab = () => {
                     <option value="weekly">Weekly</option>
                     <option value="monthly">Monthly</option>
                     <option value="quarterly">Quarterly</option>
+                  </select>
+                </div>
+                
+                <div className="space-y-2">
+                  <label htmlFor="generatorMaintenanceReminder" className="font-medium">Generator Maintenance Reminder Frequency</label>
+                  <select 
+                    id="generatorMaintenanceReminder" 
+                    className="w-full p-2 border rounded-md"
+                    defaultValue="monthly"
+                  >
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="biannually">Bi-annually</option>
                   </select>
                 </div>
               </div>
