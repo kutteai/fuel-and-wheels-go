@@ -13,6 +13,7 @@ import GeneratorService from "./pages/GeneratorService";
 import TrackOrder from "./pages/TrackOrder";
 import Subscription from "./pages/Subscription";
 import Dashboard from "./pages/Dashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Blog from "./pages/Blog";
@@ -50,6 +51,14 @@ const App = () => {
                   element={
                     <ProtectedRoute>
                       <Dashboard />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/admin" 
+                  element={
+                    <ProtectedRoute>
+                      <AdminDashboard />
                     </ProtectedRoute>
                   } 
                 />

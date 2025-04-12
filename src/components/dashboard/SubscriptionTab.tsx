@@ -84,7 +84,7 @@ const SubscriptionTab = () => {
                     Basic Plan
                   </CardTitle>
                   <CardDescription>
-                    <span className="text-xl font-bold">$9.99</span>/month
+                    <span className="text-xl font-bold">₦100,000</span>/month
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="pb-2">
@@ -115,7 +115,7 @@ const SubscriptionTab = () => {
                     Premium Plan
                   </CardTitle>
                   <CardDescription>
-                    <span className="text-xl font-bold">$19.99</span>/month
+                    <span className="text-xl font-bold">₦250,000</span>/month
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="pb-2">

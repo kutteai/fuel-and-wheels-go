@@ -111,7 +111,7 @@ const Subscription = () => {
                     <CardTitle className="text-xl">Basic Plan</CardTitle>
                     <CardDescription>For casual users</CardDescription>
                     <div className="mt-4">
-                      <span className="text-4xl font-bold">₦5,000</span>
+                      <span className="text-4xl font-bold">₦100,000</span>
                       <span className="text-gray-500">/month</span>
                     </div>
                   </CardHeader>
@@ -139,7 +139,7 @@ const Subscription = () => {
                 {/* Pro Plan */}
                 <Card className="relative border-2 border-brand-blue card-shadow transform scale-105 z-10">
                   <div className="absolute top-0 right-0">
-                    <Badge className="bg-brand-yellow text-gray-900 m-2">POPULAR</Badge>
+                    <Badge className="bg-brand-orange text-gray-900 m-2">POPULAR</Badge>
                   </div>
                   <CardHeader className="text-center bg-brand-blue text-white pb-2">
                     <div className="mb-1">
@@ -148,7 +148,7 @@ const Subscription = () => {
                     <CardTitle className="text-xl">Pro Plan</CardTitle>
                     <CardDescription className="text-blue-100">For families & regular users</CardDescription>
                     <div className="mt-4">
-                      <span className="text-4xl font-bold">₦10,000</span>
+                      <span className="text-4xl font-bold">₦250,000</span>
                       <span className="text-blue-100">/month</span>
                     </div>
                   </CardHeader>
@@ -179,12 +179,12 @@ const Subscription = () => {
                 <Card className="relative border-2 border-gray-200 card-shadow">
                   <CardHeader className="text-center bg-gray-900 text-white pb-2">
                     <div className="mb-1">
-                      <Zap className="h-10 w-10 text-brand-yellow mx-auto" />
+                      <Zap className="h-10 w-10 text-brand-orange mx-auto" />
                     </div>
                     <CardTitle className="text-xl">Elite Plan</CardTitle>
                     <CardDescription className="text-gray-300">For businesses & power users</CardDescription>
                     <div className="mt-4">
-                      <span className="text-4xl font-bold">₦18,000</span>
+                      <span className="text-4xl font-bold">₦500,000</span>
                       <span className="text-gray-300">/month</span>
                     </div>
                   </CardHeader>
@@ -225,10 +225,10 @@ const Subscription = () => {
                     <CardTitle className="text-xl">Basic Plan</CardTitle>
                     <CardDescription>For casual users</CardDescription>
                     <div className="mt-4">
-                      <span className="text-4xl font-bold">₦54,000</span>
+                      <span className="text-4xl font-bold">₦1,080,000</span>
                       <span className="text-gray-500">/year</span>
                     </div>
-                    <p className="text-green-600 text-sm mt-1">Save ₦6,000</p>
+                    <p className="text-green-600 text-sm mt-1">Save ₦120,000</p>
                   </CardHeader>
                   <CardContent className="space-y-4 pt-6">
                     <div className="space-y-3">
@@ -254,7 +254,7 @@ const Subscription = () => {
                 {/* Pro Yearly */}
                 <Card className="relative border-2 border-brand-blue card-shadow transform scale-105 z-10">
                   <div className="absolute top-0 right-0">
-                    <Badge className="bg-brand-yellow text-gray-900 m-2">BEST VALUE</Badge>
+                    <Badge className="bg-brand-orange text-gray-900 m-2">BEST VALUE</Badge>
                   </div>
                   <CardHeader className="text-center bg-brand-blue text-white pb-2">
                     <div className="mb-1">
@@ -263,10 +263,10 @@ const Subscription = () => {
                     <CardTitle className="text-xl">Pro Plan</CardTitle>
                     <CardDescription className="text-blue-100">For families & regular users</CardDescription>
                     <div className="mt-4">
-                      <span className="text-4xl font-bold">₦108,000</span>
+                      <span className="text-4xl font-bold">₦2,700,000</span>
                       <span className="text-blue-100">/year</span>
                     </div>
-                    <p className="text-green-300 text-sm mt-1">Save ₦12,000</p>
+                    <p className="text-green-300 text-sm mt-1">Save ₦300,000</p>
                   </CardHeader>
                   <CardContent className="space-y-4 pt-6">
                     <div className="space-y-3">
@@ -295,15 +295,15 @@ const Subscription = () => {
                 <Card className="relative border-2 border-gray-200 card-shadow">
                   <CardHeader className="text-center bg-gray-900 text-white pb-2">
                     <div className="mb-1">
-                      <Zap className="h-10 w-10 text-brand-yellow mx-auto" />
+                      <Zap className="h-10 w-10 text-brand-orange mx-auto" />
                     </div>
                     <CardTitle className="text-xl">Elite Plan</CardTitle>
                     <CardDescription className="text-gray-300">For businesses & power users</CardDescription>
                     <div className="mt-4">
-                      <span className="text-4xl font-bold">₦194,400</span>
+                      <span className="text-4xl font-bold">₦5,400,000</span>
                       <span className="text-gray-300">/year</span>
                     </div>
-                    <p className="text-green-300 text-sm mt-1">Save ₦21,600</p>
+                    <p className="text-green-300 text-sm mt-1">Save ₦600,000</p>
                   </CardHeader>
                   <CardContent className="space-y-4 pt-6">
                     <div className="space-y-3">

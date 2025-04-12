@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Shield, 
   Wrench, 
@@ -60,7 +59,7 @@ const Dashboard = () => {
                   onClick={() => handleTabChange("overview")}
                 >
                   <Home className="mr-2 h-5 w-5" />
-                  Overview
+                  <span className="w-full text-left">Overview</span>
                 </Button>
                 <Button 
                   variant={activeTab === "profile" ? "default" : "ghost"} 
@@ -69,7 +68,7 @@ const Dashboard = () => {
                   onClick={() => handleTabChange("profile")}
                 >
                   <User className="mr-2 h-5 w-5" />
-                  Profile
+                  <span className="w-full text-left">Profile</span>
                 </Button>
                 <Button 
                   variant={activeTab === "vehicles" ? "default" : "ghost"} 
@@ -78,7 +77,7 @@ const Dashboard = () => {
                   onClick={() => handleTabChange("vehicles")}
                 >
                   <Car className="mr-2 h-5 w-5" />
-                  My Vehicles
+                  <span className="w-full text-left">My Vehicles</span>
                 </Button>
                 <Button 
                   variant={activeTab === "locations" ? "default" : "ghost"} 
@@ -87,7 +86,7 @@ const Dashboard = () => {
                   onClick={() => handleTabChange("locations")}
                 >
                   <MapPin className="mr-2 h-5 w-5" />
-                  Saved Locations
+                  <span className="w-full text-left">Saved Locations</span>
                 </Button>
                 <Button 
                   variant={activeTab === "payment" ? "default" : "ghost"} 
@@ -96,7 +95,7 @@ const Dashboard = () => {
                   onClick={() => handleTabChange("payment")}
                 >
                   <CreditCard className="mr-2 h-5 w-5" />
-                  Payment Methods
+                  <span className="w-full text-left">Payment Methods</span>
                 </Button>
                 <Button 
                   variant={activeTab === "subscription" ? "default" : "ghost"} 
@@ -105,7 +104,7 @@ const Dashboard = () => {
                   onClick={() => handleTabChange("subscription")}
                 >
                   <Shield className="mr-2 h-5 w-5" />
-                  Subscription
+                  <span className="w-full text-left">Subscription</span>
                 </Button>
                 <Button 
                   variant={activeTab === "history" ? "default" : "ghost"} 
@@ -114,7 +113,7 @@ const Dashboard = () => {
                   onClick={() => handleTabChange("history")}
                 >
                   <History className="mr-2 h-5 w-5" />
-                  Order History
+                  <span className="w-full text-left">Order History</span>
                 </Button>
                 <Button 
                   variant={activeTab === "settings" ? "default" : "ghost"} 
@@ -123,7 +122,7 @@ const Dashboard = () => {
                   onClick={() => handleTabChange("settings")}
                 >
                   <Settings className="mr-2 h-5 w-5" />
-                  Settings
+                  <span className="w-full text-left">Settings</span>
                 </Button>
                 <Button 
                   variant="ghost" 
@@ -132,7 +131,7 @@ const Dashboard = () => {
                   onClick={handleLogout}
                 >
                   <LogOut className="mr-2 h-5 w-5" />
-                  Logout
+                  <span className="w-full text-left">Logout</span>
                 </Button>
               </div>
             </CardContent>
