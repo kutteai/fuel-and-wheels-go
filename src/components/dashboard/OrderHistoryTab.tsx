@@ -15,7 +15,7 @@ const sampleOrders = [
     type: "fuel", 
     status: "Completed", 
     description: "10 Gallons Premium Fuel", 
-    amount: "$45.99",
+    amount: "₦45,990",
     address: "123 Main St, Anytown"
   },
   { 
@@ -24,7 +24,7 @@ const sampleOrders = [
     type: "service", 
     status: "Completed", 
     description: "Oil Change + Tire Rotation", 
-    amount: "$89.99",
+    amount: "₦89,990",
     address: "123 Main St, Anytown"
   },
   { 
@@ -33,7 +33,7 @@ const sampleOrders = [
     type: "fuel", 
     status: "Completed", 
     description: "15 Gallons Regular Fuel", 
-    amount: "$52.50",
+    amount: "₦52,500",
     address: "456 Business Ave, Workville"
   }
 ];
@@ -46,7 +46,7 @@ const sampleGeneratorServices = [
     type: "generator", 
     status: "Completed", 
     description: "Annual Maintenance & Oil Change", 
-    amount: "$120.00",
+    amount: "₦120,000",
     address: "123 Main St, Anytown",
     generatorModel: "Honda EU2200i"
   },
@@ -56,7 +56,7 @@ const sampleGeneratorServices = [
     type: "generator", 
     status: "Completed", 
     description: "Carburetor Cleaning & Spark Plug Replacement", 
-    amount: "$85.00",
+    amount: "₦85,000",
     address: "123 Main St, Anytown",
     generatorModel: "Generac GP8000E"
   }

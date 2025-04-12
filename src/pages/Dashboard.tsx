@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -41,12 +40,14 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
   const navigate = useNavigate();
   const { logout } = useAuth();
   const { toast } = useToast();
   
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
+    setIsSheetOpen(false); // Close the sheet when tab changes
   };
   
   const handleLogout = () => {
@@ -55,6 +56,7 @@ const Dashboard = () => {
       title: "Logged out",
       description: "You have been successfully logged out.",
     });
+    setIsSheetOpen(false); // Close the sheet when logging out
   };
 
   // Define menu items
@@ -73,7 +75,7 @@ const Dashboard = () => {
     <div className="container mx-auto py-10 px-4">
       <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
       <div className="block md:hidden mb-6">
-        <Sheet>
+        <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
           <SheetTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <Menu className="h-5 w-5" />
@@ -89,9 +91,7 @@ const Dashboard = () => {
                     variant={activeTab === item.id ? "default" : "ghost"} 
                     className="w-full justify-start" 
                     size="sm"
-                    onClick={() => {
-                      handleTabChange(item.id);
-                    }}
+                    onClick={() => handleTabChange(item.id)}
                   >
                     <item.icon className="mr-2 h-4 w-4" />
                     <span className="w-full text-left">{item.label}</span>
