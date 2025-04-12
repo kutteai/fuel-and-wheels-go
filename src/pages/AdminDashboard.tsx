@@ -29,7 +29,8 @@ import {
   TrendingUp,
   TrendingDown,
   Calendar,
-  MessageSquare
+  MessageSquare,
+  AlertCircle
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from "@/components/ui/use-toast";
@@ -384,9 +385,9 @@ const AdminDashboard = () => {
                             <td className="p-3">{order.amount}</td>
                             <td className="p-3">
                               <Badge variant={
-                                order.status === "completed" ? "success" : 
+                                order.status === "completed" ? "secondary" : 
                                 order.status === "processing" ? "default" :
-                                order.status === "pending" ? "secondary" : "destructive"
+                                order.status === "pending" ? "outline" : "destructive"
                               } className={
                                 order.status === "completed" ? "bg-green-100 text-green-800" : 
                                 order.status === "processing" ? "bg-blue-100 text-blue-800" :

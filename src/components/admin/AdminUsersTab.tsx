@@ -149,7 +149,7 @@ const AdminUsersTab = () => {
                       {getSubscriptionBadge(user.subscription)}
                     </td>
                     <td className="p-3">
-                      <Badge variant={user.status === "active" ? "success" : "destructive"} className={user.status === "active" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}>
+                      <Badge variant={user.status === "active" ? "secondary" : "destructive"} className={user.status === "active" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}>
                         {user.status}
                       </Badge>
                     </td>
