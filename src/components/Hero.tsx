@@ -1,10 +1,14 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Fuel, Car, Zap, AlertTriangle } from 'lucide-react';
 
 const Hero = () => {
+  useEffect(() => {
+    console.log("Hero component mounted");
+  }, []);
+
   return (
     <div className="hero-gradient text-white py-16 md:py-24 relative overflow-hidden">
       <div className="container mx-auto px-4">
