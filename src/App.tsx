@@ -22,11 +22,16 @@ import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const App = () => {
   // Create a new QueryClient instance inside the component
   const [queryClient] = useState(() => new QueryClient());
+  
+  // Add debugging for route rendering
+  useEffect(() => {
+    console.log("App component mounted");
+  }, []);
   
   return (
     <QueryClientProvider client={queryClient}>
