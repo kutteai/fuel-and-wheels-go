@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Menu, X, Fuel, Car, User, LogIn, LogOut, Zap } from 'lucide-react';
+import { Menu, X, Fuel, Car, User, LogIn, LogOut, Zap, AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -42,7 +42,7 @@ const Navbar = () => {
   return (
     <nav 
       className={cn(
-        "sticky top-0 z-50 transition-all duration-300",
+        "sticky top-0 z-50 transition-all duration-300 w-full",
         scrolled ? "bg-white shadow-md py-2" : "bg-white shadow-sm py-3"
       )}
     >
@@ -50,7 +50,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="h-12 w-12 relative">
+            <div className="h-10 w-10 relative">
               <img 
                 src="/lovable-uploads/8cb67c2f-8aea-46cd-affa-fde848dcb918.png" 
                 alt="Creskiosk Logo" 
@@ -61,14 +61,14 @@ const Navbar = () => {
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center justify-center space-x-6 flex-1 max-w-3xl mx-auto">
             <NavLink to="/">Home</NavLink>
-            <NavLink to="/fuel">Fuel Delivery</NavLink>
+            <NavLink to="/fuel">Fuel</NavLink>
             <NavLink to="/service">Car Service</NavLink>
-            <NavLink to="/generator">Generator Maintenance</NavLink>
+            <NavLink to="/generator">Generator</NavLink>
+            <NavLink to="/emergency">Emergency</NavLink>
             <NavLink to="/subscription">Plans</NavLink>
             <NavLink to="/blog">Blog</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
           </div>
           
           {/* Login/Dashboard and Order Button */}
@@ -99,7 +99,7 @@ const Navbar = () => {
               </Link>
             )}
             <Link to="/fuel">
-              <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white transition-transform hover:scale-105">
+              <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white">
                 Order Now
               </Button>
             </Link>
@@ -119,7 +119,7 @@ const Navbar = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div 
-              className="md:hidden absolute left-0 right-0 bg-white z-20 shadow-md pb-4 px-4"
+              className="md:hidden fixed inset-0 top-[60px] bg-white z-40 pb-4 px-4 overflow-y-auto"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
@@ -130,6 +130,7 @@ const Navbar = () => {
                 <MobileNavLink to="/fuel">Fuel Delivery</MobileNavLink>
                 <MobileNavLink to="/service">Car Service</MobileNavLink>
                 <MobileNavLink to="/generator">Generator Maintenance</MobileNavLink>
+                <MobileNavLink to="/emergency">Emergency Services</MobileNavLink>
                 <MobileNavLink to="/subscription">Plans</MobileNavLink>
                 <MobileNavLink to="/blog">Blog</MobileNavLink>
                 <MobileNavLink to="/contact">Contact</MobileNavLink>
@@ -197,7 +198,7 @@ const MobileNavLink = ({ to, children }: { to: string, children: React.ReactNode
     <Link 
       to={to} 
       className={cn(
-        "py-2 font-medium block",
+        "py-3 font-medium block border-b border-gray-100",
         isActive ? "text-brand-blue" : "text-gray-700"
       )}
     >
